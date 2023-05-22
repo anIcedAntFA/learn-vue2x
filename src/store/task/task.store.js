@@ -7,7 +7,13 @@ const taskStore = {
         id: '1',
         title: 'todo 1',
         isImportant: false,
-        isCompleted: false,
+        status: 'pending',
+      },
+      {
+        id: '2',
+        title: 'todo 2',
+        isImportant: true,
+        status: 'completed',
       },
     ],
   },
@@ -17,6 +23,16 @@ const taskStore = {
     },
     tasks(state) {
       return state.tasks;
+    },
+    pendingTasks(state) {
+      return state.tasks.filter((task) => task.status === 'pending');
+    },
+    completedTasks(state) {
+      return state.tasks.filter((task) => task.status === 'completed');
+    },
+    progress(state, getters) {
+      const completedTasks = getters.completedTasks;
+      return Math.round((completedTasks.length / state.tasks.length) * 100);
     },
   },
   mutations: {

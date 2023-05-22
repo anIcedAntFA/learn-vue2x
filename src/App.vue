@@ -11,6 +11,11 @@
     <div>
       <button @click="updateProfile">update profile</button>
     </div>
+    <hr />
+    <div>
+      <p>completed tasks</p>
+      <p>{{ completedTasks }}</p>
+    </div>
   </div>
 </template>
 
@@ -28,8 +33,9 @@ export default {
   computed: {
     // convert store.state.name => this.name
     ...mapGetters('task', {
-      tasks: 'tasks',
       name: 'name',
+      tasks: 'tasks',
+      completedTasks: 'completedTasks',
     }),
 
     showTask() {
