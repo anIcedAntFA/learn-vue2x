@@ -1,19 +1,50 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view />
+    <div>{{ showTask }}</div>
+    <hr />
+    <div>
+      <p>{{ name }}</p>
+      <button @click="setName('ngockhoi98')">change name</button>
+    </div>
+    <hr />
+    <div>
+      <button @click="updateProfile">update profile</button>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: {},
+  // data: () => {
+  //   return {
+  //     task: this.$store.state.task,
+  //   };
+  // },
+  computed: {
+    // convert store.state.name => this.name
+    ...mapGetters('task', {
+      tasks: 'tasks',
+      name: 'name',
+    }),
+
+    showTask() {
+      return this.tasks;
+    },
+  },
+  methods: {
+    ...mapMutations('task', {
+      setName: 'setName',
+    }),
+    ...mapActions('task', {
+      updateProfile: 'updateProfile',
+    }),
+  },
+};
 </script>
 
 <style>
@@ -24,5 +55,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.isSelect {
+  color: orange;
 }
 </style>
