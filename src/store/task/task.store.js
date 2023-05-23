@@ -1,3 +1,5 @@
+const TOGGLE_STATUS_TASK = 'TOGGLE_STATUS_TASK';
+
 const taskStore = {
   namespaced: true,
   state: {
@@ -22,7 +24,7 @@ const taskStore = {
       return state.name;
     },
     tasks(state) {
-      return state.tasks;
+      return { ...state.tasks };
     },
     pendingTasks(state) {
       return state.tasks.filter((task) => task.status === 'pending');
@@ -42,10 +44,24 @@ const taskStore = {
     createTask(state, payload) {
       state.name = payload;
     },
+    [TOGGLE_STATUS_TASK](state, payload) {
+      state.tasks.map((task) => {
+        if (task.id === payload) {
+          if (task.status === 'pending') {
+            task.status = 'completed';
+          } else {
+            task.status = 'pending';
+          }
+        }
+        return task;
+      }),
+        console.log(state.tasks);
+    },
+    DELETE_TASK() {},
   },
   actions: {
-    updateProfile(context) {
-      context.commit('setName', 'ngockhoi97');
+    updateProfile(context, payload) {
+      context.commit('setName', payload);
       console.log(context.getters);
     },
   },

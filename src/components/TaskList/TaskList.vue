@@ -1,10 +1,26 @@
 <script>
+import { mapGetters } from 'vuex';
 import TaskItem from '../TaskItem';
 
 export default {
   name: 'TaskList',
   components: {
     TaskItem,
+  },
+  computed: {
+    // convert store.state.name => this.name
+    // ...mapState('task', {
+    //   tasks: 'tasks',
+    // }),
+    ...mapGetters('task', {
+      name: 'name',
+      tasks: 'tasks',
+      completedTasks: 'completedTasks',
+    }),
+
+    showTask() {
+      return this.tasks;
+    },
   },
   data() {
     return {};
@@ -15,7 +31,11 @@ export default {
 <template lang="">
   <div>
     <div>Task List</div>
-    <TaskItem />
+    <ul>
+      <li v-for="task in tasks" :key="task.id">
+        <TaskItem :task="task" />
+      </li>
+    </ul>
   </div>
 </template>
 

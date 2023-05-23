@@ -1,21 +1,6 @@
 <template>
   <div id="app">
     <router-view />
-    <div>{{ showTask }}</div>
-    <hr />
-    <div>
-      <p>{{ name }}</p>
-      <button @click="setName('ngockhoi98')">change name</button>
-    </div>
-    <hr />
-    <div>
-      <button @click="updateProfile">update profile</button>
-    </div>
-    <hr />
-    <div>
-      <p>completed tasks</p>
-      <p>{{ completedTasks }}</p>
-    </div>
   </div>
 </template>
 
