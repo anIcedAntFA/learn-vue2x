@@ -15,6 +15,11 @@ const routes = [
     name: 'task',
     component: TaskView,
   },
+  {
+    path: '/docs',
+    name: 'docs',
+    component: TaskView,
+  },
 ];
 
 const router = new VueRouter({
